@@ -97,6 +97,28 @@
   font-weight: 500;
 }
 
+.searchHint {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 0.25rem 0.5rem;
+  background: var(--surface-hover);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-secondary);
+  font-size: 0.7rem;
+  font-weight: 700;
+  margin-right: 0.5rem;
+  pointer-events: none;
+  opacity: 0.6;
+  transition: var(--transition-fast);
+}
+
+.searchBar:focus-within .searchHint {
+  opacity: 0;
+  transform: translateX(10px);
+}
+
 .clearBtn {
   color: var(--text-secondary);
   padding: 0.5rem;

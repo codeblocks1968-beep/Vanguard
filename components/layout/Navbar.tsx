@@ -77,6 +77,10 @@ export default function Navbar() {
                 }}
                 onFocus={() => setShowSuggestions(true)}
               />
+              <div className={styles.searchHint}>
+                <span>⌘</span>
+                <span>K</span>
+              </div>
               {searchQuery && (
                 <button type="button" onClick={clearSearch} className={styles.clearBtn}>
                   <X size={16} />

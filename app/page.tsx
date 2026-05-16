@@ -55,7 +55,7 @@ export default function Home() {
             {[
               { title: 'Home', image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&q=80&w=800' },
               { title: 'Electronics', image: 'https://images.unsplash.com/photo-1498049794561-7780e7231661?auto=format&fit=crop&q=80&w=800' },
-              { title: 'Accessories', image: 'https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?auto=format&fit=crop&q=80&w=800' },
+              { title: 'Sports', image: 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&q=80&w=800' },
               { title: 'Clothing', image: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80&w=800' }
             ].map((cat, i) => (
               <Link href={`/products?category=${cat.title.toLowerCase()}`} key={i} className={styles.categoryCard}>
@@ -66,6 +66,25 @@ export default function Home() {
                   View All <ChevronRight size={16} />
                 </span>
               </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.section}>
+        <div className="container">
+          <div className={styles.sectionHeader}>
+            <div>
+              <h2 className={styles.sectionTitle}>Sports & Fitness</h2>
+              <p style={{ color: 'var(--text-secondary)', marginTop: '0.5rem' }}>Premium gear for your active lifestyle.</p>
+            </div>
+            <Link href="/products?category=sports">
+              <Button variant="ghost">Shop All Sports <ArrowRight size={16} /></Button>
+            </Link>
+          </div>
+          <div className={styles.productGrid}>
+            {products.filter(p => p.category === 'Sports').slice(0, 4).map(product => (
+              <ProductCard key={product.id} product={product} />
             ))}
           </div>
         </div>

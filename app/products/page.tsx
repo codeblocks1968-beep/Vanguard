@@ -29,8 +29,8 @@ function ProductsContent() {
     }
   }, [categoryParam]);
 
-  const categories = ["Home", "Electronics", "Accessories", "Clothing", "Appliances"];
-  const brands = ["Luma", "Velo", "Aether", "Zenith", "Nova", "Artisan", "EcoWear", "FitTech", "Sonic", "Lumina", "Aura", "Shades", "KeyTech", "Orion", "Pulse", "Terra", "Glaze", "Swift", "Peak", "Haven"];
+  const categories = ["Home", "Electronics", "Accessories", "Clothing", "Appliances", "Sports", "Toys", "Blocks"];
+  const brands = ["Luma", "Velo", "Aether", "Zenith", "Nova", "Artisan", "EcoWear", "FitTech", "Sonic", "Lumina", "Aura", "Shades", "KeyTech", "Orion", "Pulse", "Terra", "Glaze", "Swift", "Peak", "Haven", "Quest", "Vertex", "Flux", "Nexus"];
   const sizes = ['XS', 'S', 'M', 'L', 'XL', '2XL'];
 
   const filteredProducts = useMemo(() => {
@@ -39,15 +39,15 @@ function ProductsContent() {
                            product.description?.toLowerCase().includes(searchQuery);
       const matchesCategory = selectedCategories.length === 0 || selectedCategories.includes(product.category);
       const matchesBrand = selectedBrands.length === 0 || selectedBrands.includes(product.brand || '');
-      const matchesPrice = product.price >= minPrice && product.price <= maxPrice;
+      const matchesPrice = product.discountedPrice >= minPrice && product.discountedPrice <= maxPrice;
       const matchesDiscount = !onlyDiscounts || product.discount !== undefined;
       const matchesSize = selectedSizes.length === 0 || 
                          (product.sizes && selectedSizes.some(s => product.sizes?.includes(s)));
 
       return matchesSearch && matchesCategory && matchesBrand && matchesPrice && matchesDiscount && matchesSize;
     }).sort((a, b) => {
-      if (sortBy === 'Price: Low to High') return a.price - b.price;
-      if (sortBy === 'Price: High to Low') return b.price - a.price;
+      if (sortBy === 'Price: Low to High') return a.discountedPrice - b.discountedPrice;
+      if (sortBy === 'Price: High to Low') return b.discountedPrice - a.discountedPrice;
       if (sortBy === 'Customer Rating') return b.rating - a.rating;
       if (sortBy === 'Best Sellers') return b.reviews - a.reviews;
       if (sortBy === 'Most Discounted') return (b.discount || 0) - (a.discount || 0);

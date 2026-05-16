@@ -5,6 +5,7 @@ export interface Product {
   id: string;
   name: string;
   price: number;
+  discountedPrice: number;
   image: string;
   category: string;
   rating: number;
@@ -13,6 +14,7 @@ export interface Product {
   description?: string;
   brand?: string;
   isNew?: boolean;
+  sizes?: string[];
 }
 
 export interface CartItem extends Product {

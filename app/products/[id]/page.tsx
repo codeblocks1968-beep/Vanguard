@@ -96,8 +96,19 @@ export default function ProductDetail({ params }: { params: { id: string } }) {
             <div className={styles.actionRow}>
               <div className={styles.qtySelector}>
                 <button className={styles.qtyBtn} onClick={() => setQty(Math.max(1, qty - 1))}><Minus size={16} /></button>
-                <input type="number" className={styles.qtyInput} value={qty} readOnly />
-                <button className={styles.qtyBtn} onClick={() => setQty(qty + 1)}><Plus size={16} /></button>
+                <input 
+                  type="number" 
+                  className={styles.qtyInput} 
+                  value={qty} 
+                  onChange={(e) => {
+                    const val = parseInt(e.target.value);
+                    if (isNaN(val)) setQty(1);
+                    else setQty(Math.min(15, Math.max(1, val)));
+                  }}
+                  min="1"
+                  max="15"
+                />
+                <button className={styles.qtyBtn} onClick={() => setQty(Math.min(15, qty + 1))}><Plus size={16} /></button>
               </div>
 
               <Button variant="secondary" className={styles.cartBtn} onClick={handleAddToCart}>
