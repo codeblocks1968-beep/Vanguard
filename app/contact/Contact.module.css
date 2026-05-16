@@ -1,0 +1,198 @@
+.page {
+  padding: 4rem 0;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.header h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+
+.header p {
+  color: var(--text-secondary);
+  font-size: 1.125rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 3rem;
+  margin-bottom: 5rem;
+}
+
+.infoCol {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.infoCard {
+  padding: 2.5rem;
+  border-radius: var(--radius-lg);
+}
+
+.infoCard h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+}
+
+.infoList {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.infoItem {
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+}
+
+.iconBox {
+  width: 3rem;
+  height: 3rem;
+  background: rgba(59, 130, 246, 0.1);
+  color: var(--accent);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.infoItem label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  letter-spacing: 0.05em;
+  margin-bottom: 0.25rem;
+}
+
+.infoItem p {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 0.125rem;
+}
+
+.infoItem span {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.hoursList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.hourRow {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-secondary);
+}
+
+.hourRow:last-child {
+  border-bottom: none;
+}
+
+.hourRow span:first-child {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.contactForm {
+  padding: 3rem;
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.contactForm h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.inputGroupFull {
+  grid-column: span 2;
+}
+
+.inputGroup, .inputGroupFull {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.inputGroup label, .inputGroupFull label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.inputGroup input, .inputGroupFull input, .inputGroupFull select, .inputGroupFull textarea {
+  padding: 0.875rem 1rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--background);
+  color: var(--text-primary);
+  outline: none;
+  transition: var(--transition);
+  font-family: inherit;
+}
+
+.inputGroup input:focus, .inputGroupFull input:focus, .inputGroupFull select:focus, .inputGroupFull textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+}
+
+.mapSection {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.mapSection h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.mapWrapper {
+  box-shadow: var(--shadow-lg);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+@media (max-width: 992px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+  .inputGroupFull {
+    grid-column: span 1;
+  }
+  .header h1 {
+    font-size: 2.25rem;
+  }
+}

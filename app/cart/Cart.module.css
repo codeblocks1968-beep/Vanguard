@@ -1,0 +1,416 @@
+.page {
+  padding: 8rem 0 5rem;
+}
+
+.checkoutHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4rem;
+  gap: 2rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 2rem;
+}
+
+.title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+
+.stepper {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.step {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: var(--text-secondary);
+  transition: var(--transition-bounce);
+  background: var(--surface);
+}
+
+.activeStep {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-glow);
+  transform: scale(1.1);
+  box-shadow: 0 0 15px var(--accent-glow);
+}
+
+.completedStep {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: white;
+}
+
+.stepLine {
+  width: 3rem;
+  height: 2px;
+  background: var(--border);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 4rem;
+  align-items: flex-start;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.cartList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.cartItem {
+  display: flex;
+  gap: 2rem;
+  padding: 2rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  transition: var(--transition-smooth);
+}
+
+.cartItem:hover {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-4px);
+}
+
+.itemImage {
+  width: 140px;
+  height: 140px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 1px solid var(--border);
+}
+
+.itemImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.itemInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.itemHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.itemHeader h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.itemCategory {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.itemFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.5rem;
+}
+
+.quantity {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  padding: 0.5rem 1rem;
+}
+
+.quantity button {
+  color: var(--text-secondary);
+  transition: var(--transition-fast);
+}
+
+.quantity button:hover {
+  color: var(--accent);
+}
+
+.quantity span {
+  font-weight: 700;
+  font-size: 1rem;
+  min-width: 1rem;
+  text-align: center;
+}
+
+.itemPrice {
+  font-weight: 800;
+  font-size: 1.5rem;
+  letter-spacing: -0.02em;
+}
+
+.removeBtn {
+  color: var(--text-secondary);
+  padding: 0.5rem;
+  border-radius: var(--radius-full);
+  transition: var(--transition-fast);
+}
+
+.removeBtn:hover {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--danger);
+}
+
+.formSection,
+.reviewSection {
+  padding: 3.5rem;
+  border-radius: var(--radius-xl);
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.formSection h3,
+.reviewSection h3 {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1.75rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.inputGroupFull {
+  grid-column: span 2;
+}
+
+.inputGroup,
+.inputGroupFull {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.inputGroup label,
+.inputGroupFull label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.inputGroup input,
+.inputGroupFull input {
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--background);
+  color: var(--text-primary);
+  outline: none;
+  font-weight: 600;
+  transition: var(--transition-fast);
+}
+
+.inputGroup input:focus,
+.inputGroupFull input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-glow);
+}
+
+.formActions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+  gap: 1.5rem;
+}
+
+.reviewGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+}
+
+.reviewBox h4 {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+}
+
+.reviewBox p {
+  line-height: 1.8;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.summaryCard {
+  padding: 2.5rem;
+  border-radius: var(--radius-xl);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  position: sticky;
+  top: 8rem;
+}
+
+.summaryCard h2 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.summaryRows {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.total {
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  color: var(--text-primary);
+  font-weight: 800;
+  font-size: 1.75rem;
+  letter-spacing: -0.03em;
+}
+
+.secureText {
+  font-size: 0.8rem;
+  text-align: center;
+  color: var(--text-secondary);
+  font-weight: 500;
+  opacity: 0.7;
+}
+
+.emptyPage,
+.successPage {
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.successContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
+  max-width: 600px;
+}
+
+.successContent h1 {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+
+.successContent p {
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.emailSimulation {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1.25rem 2.5rem;
+  background: var(--surface);
+  border-radius: var(--radius-full);
+  color: var(--text-secondary);
+  font-weight: 700;
+  border: 1px solid var(--border);
+  transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: var(--shadow-sm);
+}
+
+.emailSimulation.sent {
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--success);
+  border-color: var(--success);
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
+}
+
+@media (max-width: 1200px) {
+  .layout {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  
+  .summaryCard {
+    position: static;
+  }
+}
+
+@media (max-width: 768px) {
+  .page {
+    padding: 6rem 0 3rem;
+  }
+  
+  .checkoutHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .cartItem {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .itemImage {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+  }
+  
+  .formGrid,
+  .reviewGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .formSection {
+    padding: 2rem;
+  }
+}
