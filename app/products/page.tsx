@@ -1,7 +1,7 @@
 'use client';
 import React, { useState, useMemo, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { LayoutGrid, List, X } from 'lucide-react';
+import { LayoutGrid, List, X, Search } from 'lucide-react';
 import styles from './Products.module.css';
 import { products } from '@/data/products';
 import ProductCard from '@/components/ui/ProductCard';
@@ -18,8 +18,14 @@ function ProductsContent() {
   const [onlyDiscounts, setOnlyDiscounts] = useState(false);
   const [sortBy, setSortBy] = useState('Newest Arrivals');
 
-  const searchQuery = searchParams.get('search')?.toLowerCase() || '';
+  const initialSearchQuery = searchParams.get('search')?.toLowerCase() || '';
+  const [localSearch, setLocalSearch] = useState(initialSearchQuery);
   const categoryParam = searchParams.get('category');
+
+  // Sync local search when URL changes (e.g. from navbar)
+  React.useEffect(() => {
+    setLocalSearch(initialSearchQuery);
+  }, [initialSearchQuery]);
 
   // Initialize filters from query params if present
   React.useEffect(() => {
@@ -30,13 +36,15 @@ function ProductsContent() {
   }, [categoryParam]);
 
   const categories = ["Home", "Electronics", "Accessories", "Clothing", "Appliances", "Sports", "Toys", "Blocks"];
-  const brands = ["Luma", "Velo", "Aether", "Zenith", "Nova", "Artisan", "EcoWear", "FitTech", "Sonic", "Lumina", "Aura", "Shades", "KeyTech", "Orion", "Pulse", "Terra", "Glaze", "Swift", "Peak", "Haven", "Quest", "Vertex", "Flux", "Nexus"];
+  const allBrands = Array.from(new Set(products.map(p => p.brand).filter(Boolean))).sort();
+  const brands = allBrands.slice(0, Math.ceil(allBrands.length / 2));
   const sizes = ['XS', 'S', 'M', 'L', 'XL', '2XL'];
 
   const filteredProducts = useMemo(() => {
     return products.filter(product => {
-      const matchesSearch = product.name.toLowerCase().includes(searchQuery) || 
-                           product.description?.toLowerCase().includes(searchQuery);
+      const matchesSearch = product.name.toLowerCase().includes(localSearch.toLowerCase()) || 
+                           product.description?.toLowerCase().includes(localSearch.toLowerCase()) ||
+                           product.brand?.toLowerCase().includes(localSearch.toLowerCase());
       const matchesCategory = selectedCategories.length === 0 || selectedCategories.includes(product.category);
       const matchesBrand = selectedBrands.length === 0 || selectedBrands.includes(product.brand || '');
       const matchesPrice = product.discountedPrice >= minPrice && product.discountedPrice <= maxPrice;
@@ -53,7 +61,7 @@ function ProductsContent() {
       if (sortBy === 'Most Discounted') return (b.discount || 0) - (a.discount || 0);
       return 0;
     });
-  }, [searchQuery, selectedCategories, selectedBrands, minPrice, maxPrice, onlyDiscounts, selectedSizes, sortBy]);
+  }, [localSearch, selectedCategories, selectedBrands, minPrice, maxPrice, onlyDiscounts, selectedSizes, sortBy]);
 
   const toggleCategory = (cat: string) => {
     setSelectedCategories(prev => 
@@ -80,6 +88,7 @@ function ProductsContent() {
     setMinPrice(0);
     setMaxPrice(500);
     setOnlyDiscounts(false);
+    setLocalSearch('');
   };
 
   return (
@@ -87,7 +96,7 @@ function ProductsContent() {
       <div className={styles.header}>
         <div>
           <h1 className={styles.title}>
-            {searchQuery ? `Search results for "${searchQuery}"` : 'All Products'}
+            {localSearch ? `Search results for "${localSearch}"` : 'All Products'}
           </h1>
           <p className={styles.subtitle}>
             Showing {filteredProducts.length} of {products.length} products
@@ -154,10 +163,10 @@ function ProductsContent() {
           <div className={styles.filterGroup}>
             <h3>Brands</h3>
             <div className={styles.filterList}>
-              {brands.slice(0, 8).map((brand, i) => (
+              {brands.map((brand, i) => (
                 <label key={i} className={styles.filterItem}>
-                  <input type="checkbox" checked={selectedBrands.includes(brand)} onChange={() => toggleBrand(brand)} />
-                  <span>{brand}</span>
+                  <input type="checkbox" checked={selectedBrands.includes(brand as string)} onChange={() => toggleBrand(brand as string)} />
+                  <span>{brand as string}</span>
                 </label>
               ))}
             </div>
@@ -166,23 +175,41 @@ function ProductsContent() {
 
         <main className={styles.main}>
           <div className={styles.toolbar}>
-            <div className={styles.viewToggles}>
-              <button className={`${styles.viewBtn} ${view === 'grid' ? styles.active : ''}`} onClick={() => setView('grid')}>
-                <LayoutGrid size={20} />
-              </button>
-              <button className={`${styles.viewBtn} ${view === 'list' ? styles.active : ''}`} onClick={() => setView('list')}>
-                <List size={20} />
-              </button>
+            <div className={styles.pageSearchWrapper}>
+              <Search size={16} className={styles.pageSearchIcon} />
+              <input 
+                type="text" 
+                placeholder="Search products..." 
+                className={styles.pageSearchInput}
+                value={localSearch}
+                onChange={(e) => setLocalSearch(e.target.value)}
+              />
+              {localSearch && (
+                <button className={styles.pageSearchClearBtn} onClick={() => setLocalSearch('')}>
+                  <X size={14} />
+                </button>
+              )}
             </div>
 
-            <select className={styles.sortSelect} value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
-              <option>Newest Arrivals</option>
-              <option>Best Sellers</option>
-              <option>Most Discounted</option>
-              <option>Price: Low to High</option>
-              <option>Price: High to Low</option>
-              <option>Customer Rating</option>
-            </select>
+            <div className={styles.toolbarActions}>
+              <div className={styles.viewToggles}>
+                <button className={`${styles.viewBtn} ${view === 'grid' ? styles.active : ''}`} onClick={() => setView('grid')}>
+                  <LayoutGrid size={20} />
+                </button>
+                <button className={`${styles.viewBtn} ${view === 'list' ? styles.active : ''}`} onClick={() => setView('list')}>
+                  <List size={20} />
+                </button>
+              </div>
+
+              <select className={styles.sortSelect} value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+                <option>Newest Arrivals</option>
+                <option>Best Sellers</option>
+                <option>Most Discounted</option>
+                <option>Price: Low to High</option>
+                <option>Price: High to Low</option>
+                <option>Customer Rating</option>
+              </select>
+            </div>
           </div>
 
           {filteredProducts.length > 0 ? (
